@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>連結試算表 - 表單Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Connect to Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+    </script>
+    <!-- CSS Format Changes -->
+    <style>
+        .container-contact {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            background-color: rgb(42, 165, 159);
+            width: 100%;
+        }
+        
+        .container-contact h3 {
+            font-size: 30px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .btn {
+            width: 100%;
+            font-size: 20px;
+            margin: 20px 0px 20px 0px;
+            background-color: rgb(6, 117, 119);
+            color: rgb(255, 255, 255);
+            border-radius: 20px;
+            transition: 1s;
+        }
+        
+        .btn:hover {
+            background-color: rgb(178, 224, 84);
+            color: black;
+        }
+        
+        input {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-contact">
+        <h3>Fill in Receipt Information One by One!</h3>
+
+        <div class="row">
+            <!-- The first column - Space -->
+            <div class="col-sm-2">
+
+            </div>
+            <!-- The Second Column - Data Input -->
+            <div class="col-sm-8">
+                <form id="myForm">
+                    <div class="row">
+                        <!-- The first Entry - Receipt Date -->
+
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control" id="date" name="date" placeholder="Receipt Date" type="text" required>
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control" id="receiptNo" name="receiptNo" placeholder="Receipt No assigned by you" type="text" required>
+                        </div>
+                        <br>
+
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control" id="company" name="company" placeholder="Company Name Stated in the Receipt" type="text" required>
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <input class="form-control" id="totalhkd" name="totalhkd" placeholder="Total Amount of HKD" type="text" required>
+                        </div>
+                        <br>
+
+                        <div class="col-sm-12 form-group">
+                            <input class="form-control" id="details" name="details" placeholder="Description of Items that you buy" type="text" required>
+                        </div>
+
+                    </div>
+                    <br>
+                    <textarea class="form-control" id="remarks" name="remarks" placeholder="Remarks" rows="5"></textarea>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <button class="btn " type="submit" id="submitButton">送出Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- The 3rd Column - Combines must be 12 -->
+            <div class="col-sm-2">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Capture the inputted Data
+
+        function getValues(){
+            var date=document.getElementById("date");
+            var receiptNo=document.getElementById("receiptNo");
+            var company=document.getElementById("company");
+            var totalhkd=document.getElementById("totalhkd");
+            var details=document.getElementById("details");
+            var remarks=document.getElementById("remarks");
+
+            var rowData={
+                date:date.value,
+                receiptNo:receiptNo.value,
+                company:company.value,
+                totalhkd:totalhkd.value,
+                details:details.value,
+                remarks:remarks.value
+            }
+
+            //upload data
+            google.script.run.addData(rowData);
+            //Clear Data After upload in the form
+            document.getElementById("myForm").reset();
+            //popout after finish if successful
+            alert("Finished! Please check your group excel sheet to see if it's inputted correctly!")
+        }
+
+        document.getElementById("submitButton").addEventListener("click", getValues");
+
+
+
+
+    </script>
+</body>
+
+</html>
